@@ -1,0 +1,40 @@
+classDiagram
+    direction TB
+
+    class ProgramInterface {
+        <<interface>>
+        +go() void
+    }
+
+    class Program1 {
+        +go() void
+    }
+
+    class Program2 {
+        +go() void
+    }
+
+    class Program3 {
+        +go() void
+    }
+
+    class ProgramFactory {
+        +createProgram(n: int) ProgramInterface
+    }
+
+    class Client {
+        +main(args: String[]) void
+        +run(n: int) void
+    }
+
+    ProgramInterface <|.. Program1
+    ProgramInterface <|.. Program2
+    ProgramInterface <|.. Program3
+
+    ProgramFactory ..> ProgramInterface : creates
+    ProgramFactory ..> Program1 : instantiates
+    ProgramFactory ..> Program2 : instantiates
+    ProgramFactory ..> Program3 : instantiates
+
+    Client ..> ProgramFactory : calls
+    Client ..> ProgramInterface : uses
